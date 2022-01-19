@@ -1,0 +1,85 @@
+<div class="control-section">
+  <div class="control-section">
+    <div class="grid-freezeprop">
+      <div class="grid-freezecol">
+        <div class="grid-freezecol">
+          <span> Column </span>
+        </div>
+        <div class="grid-freezecol">
+          <ejs-dropdownlist
+            id="column"
+            #columndropdown
+            index="7"
+            [dataSource]="columnData"
+            (change)="columnChange($event)"
+            [fields]="fields"
+          ></ejs-dropdownlist>
+        </div>
+      </div>
+      <div class="grid-freezecol">
+        <div class="grid-freezecol">
+          <span> Freeze Direction </span>
+        </div>
+        <div class="grid-freezecol">
+          <ejs-dropdownlist
+            id="direction"
+            #directiondropdown
+            index="0"
+            [dataSource]="directionData"
+            (change)="directionChange($event)"
+            [fields]="fields"
+          ></ejs-dropdownlist>
+        </div>
+      </div>
+    </div>
+
+    <ejs-treegrid
+      #treegrid
+      [dataSource]="data"
+      height="410"
+      [treeColumnIndex]="1"
+      childMapping="subtasks"
+      allowSorting="true"
+      allowSelection="false"
+      allowFiltering="true"
+      [filterSettings]="filterSettings"
+      childMapping="subtasks"
+    >
+      <e-columns>
+        <ng-container *ngFor="let column of columnData">
+          <e-column
+            field="{{ column.id }}"
+            headerText="{{ column.name }}"
+            width="100"
+            textAlign="Right"
+          ></e-column>
+        </ng-container>
+      </e-columns>
+    </ejs-treegrid>
+    <ejs-dialog
+      #alertDialog
+      [buttons]="dlgButtons"
+      [header]="header"
+      [animationSettings]="animationSettings"
+      [content]="content"
+      [showCloseIcon]="showCloseIcon"
+      [target]="target"
+      [width]="width"
+      [visible]="visible"
+    >
+    </ejs-dialog>
+
+    <!-- custom code start -->
+    <style>
+      .grid-freezeprop {
+          padding-bottom: 5px;
+      }
+
+      .grid-freezecol {
+          display: inline-block;
+          padding-right: 10px;
+      }
+    </style>
+    <!-- custom code end -->
+  </div>
+</div>
